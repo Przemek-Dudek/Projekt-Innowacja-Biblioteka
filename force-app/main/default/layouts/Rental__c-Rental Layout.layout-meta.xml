@@ -19,12 +19,12 @@
                 <field>Returning_Date__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>Rental_Date__c</field>
-            </layoutItems>
-            <layoutItems>
                 <behavior>Required</behavior>
                 <field>Item__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>Rental_Date__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
