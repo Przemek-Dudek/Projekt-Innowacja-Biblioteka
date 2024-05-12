@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Status__c</fullName>
+    <externalId>false</externalId>
+    <label>Status</label>
+    <required>true</required>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>reserved</fullName>
+                <default>true</default>
+                <label>reserved</label>
+            </value>
+            <value>
+                <fullName>borrowed</fullName>
+                <default>false</default>
+                <label>borrowed</label>
+            </value>
+            <value>
+                <fullName>turned</fullName>
+                <default>false</default>
+                <label>turned</label>
+            </value>
+            <value>
+                <fullName>delayed</fullName>
+                <default>false</default>
+                <label>delayed</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>
