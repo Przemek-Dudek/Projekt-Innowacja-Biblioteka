@@ -3,6 +3,11 @@
     <custom>false</custom>
     <fieldPermissions>
         <editable>true</editable>
+        <field>Item__c.All_Copies__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>Item__c.Author__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -62,7 +67,19 @@
         <readable>true</readable>
     </fieldPermissions>
     <layoutAssignments>
+        <layout>Item__c-Audiobook Layout</layout>
+        <recordType>Item__c.Audiobook</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Item__c-Book Layout</layout>
+        <recordType>Item__c.Book</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>Item__c-Item Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>Item__c-Magazine Layout</layout>
+        <recordType>Item__c.Magazine</recordType>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Person__c-Client</layout>
@@ -117,6 +134,21 @@
         <object>Supplier__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Item__c.Audiobook</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>true</default>
+        <recordType>Item__c.Book</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>Item__c.Magazine</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
     <recordTypeVisibilities>
         <default>true</default>
         <recordType>Person__c.Client</recordType>
