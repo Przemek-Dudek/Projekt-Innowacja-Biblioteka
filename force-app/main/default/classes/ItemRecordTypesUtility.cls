@@ -1,20 +1,14 @@
 public with sharing class ItemRecordTypesUtility {
-    public String bookRecordTypeId { get; private set; }
-    public String magazineRecordTypeId { get; private set; }
+    public static Map<String,RecordTypeInfo> recordTypeMap { get; private set; }
 
-    public ItemRecordTypesUtility() {
-        fetchRecordTypeIds();
-    }
-
-    public void fetchRecordTypeIds() {
-        List<RecordType> recordTypes = [SELECT Id, Name FROM RecordType WHERE SObjectType = 'Item__c'];
-        
-        for (RecordType rt : recordTypes) {
-            if (rt.Name == 'Book') {
-                bookRecordTypeId = rt.Id;
-            } else if (rt.Name == 'Magazine') {
-                magazineRecordTypeId = rt.Id;
+    public static Id getRecordTypeId(SobjectType sObjectType, String recordTypeName) {
+        if(!recordTypeMap.containsKey(sObjectType.getDescribe().getName()+recordTypeName)) {
+            for(RecordTypeInfo recordTypeInfo : sObjectType.getDescribe().getRecordTypeInfosByName().values()) {
+                recordTypeMap.put(sObjectType.getDescribe().getName()+recordTypeInfo.getName(), recordTypeInfo);
             }
+
         }
+        return recordTypeMap.get(sObjectType.getDescribe().getName()+recordTypeName).getRecordTypeId();    
     }
+
 }
