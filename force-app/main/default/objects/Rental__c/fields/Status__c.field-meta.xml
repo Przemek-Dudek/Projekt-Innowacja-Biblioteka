@@ -21,9 +21,9 @@
                 <label>borrowed</label>
             </value>
             <value>
-                <fullName>turned</fullName>
+                <fullName>returned</fullName>
                 <default>false</default>
-                <label>turned</label>
+                <label>returned</label>
             </value>
             <value>
                 <fullName>delayed</fullName>
