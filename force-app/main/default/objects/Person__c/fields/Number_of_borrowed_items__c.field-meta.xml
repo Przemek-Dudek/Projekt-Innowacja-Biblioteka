@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Number_of_borrowed_items__c</fullName>
+    <externalId>false</externalId>
+    <label>Number of borrowed items</label>
+    <summaryFilterItems>
+        <field>Rental__c.Status__c</field>
+        <operation>notEqual</operation>
+        <value>turned</value>
+    </summaryFilterItems>
+    <summaryFilterItems>
+        <field>Rental__c.Status__c</field>
+        <operation>notEqual</operation>
+        <value>reserved</value>
+    </summaryFilterItems>
+    <summaryForeignKey>Rental__c.Borrower__c</summaryForeignKey>
+    <summaryOperation>count</summaryOperation>
+    <trackTrending>false</trackTrending>
+    <type>Summary</type>
+</CustomField>
