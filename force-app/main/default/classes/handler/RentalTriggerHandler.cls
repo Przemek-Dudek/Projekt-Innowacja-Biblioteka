@@ -1,4 +1,4 @@
-public without sharing class TriggerHandler {
+public without sharing class RentalTriggerHandler {
     public static void checkIsBookAvailableForRental(List<Rental__c> newRentals) {
         Set<Id> itemIds = new Set<Id>();
         for (Rental__c rental : newRentals) {
