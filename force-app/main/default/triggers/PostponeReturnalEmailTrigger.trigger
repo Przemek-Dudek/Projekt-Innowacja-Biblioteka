@@ -7,7 +7,7 @@ trigger PostponeReturnalEmailTrigger on Rental__c (after update) {
 	
 	Map<String, Person__c> ClientDetails = new Map<String, Person__c>();
     
-	List<String> EmployeeAddresses=[SELECT 	Email_Address__c FROM Person__c WHERE RecordTypeId = 'Employee'];
+	List<String> EmployeeAddresses=[SELECT 	Email_Address__c FROM Person__c WHERE RecordTypeId = recordTypes.get('Employee').getRecordTypeId();];
 
 	List<Person__c> listOfClients =  [SELECT Email_Address__c, Name, Surname__c FROM Person__c WHERE Id IN :updatedRentalsDemanders];
 	
@@ -26,12 +26,10 @@ trigger PostponeReturnalEmailTrigger on Rental__c (after update) {
 			mail.setToAddresses(EmployeeAddresses);//adres do wysylki
 			mail.setSubject('Request to postpone date of the item returnal');
 			
-			String build = String.format('Check if postponing returnal is aviable for this client. Here are his data:\n Details:\nDate: {0}\nClient: {1}\nStatus: {2}\nSurgery: {3}',
+			String build = String.format('Check if postponing returnal is aviable for this client. Here are his data:\n Rental Date:{0}\nReturning Date: {1}',
 			new List<Object> {
-				appointment.Appointment_Date__c,
-				patientName,
-				appointment.Status__c,
-				appointment.Surgery__c
+				rental.Rental_Date__c,
+                rental.Returning_Date__c
 			}
 			);
 			
