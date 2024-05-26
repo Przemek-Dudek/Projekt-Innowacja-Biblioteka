@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ListView xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Charged_Clients</fullName>
+    <columns>NAME</columns>
+    <columns>Name__c</columns>
+    <columns>Surname__c</columns>
+    <columns>Charge__c</columns>
+    <filterScope>Everything</filterScope>
+    <filters>
+        <field>Number_of_borrowed_items__c</field>
+        <operation>greaterThan</operation>
+        <value>0</value>
+    </filters>
+    <label>Charged Clients</label>
+</ListView>
