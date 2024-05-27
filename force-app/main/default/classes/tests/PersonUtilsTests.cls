@@ -41,28 +41,11 @@ private class PersonUtilsTests {
         testPerson.Name__c = 'Test';
         testPerson.Surname__c = 'Person';
         insert testPerson;
-        
-        String newPin = PersonUtils.generateNewPin();
 
-        PersonUtils.setPin(testPerson, newPin);
+        PersonUtils.setPin(testPerson);
         
         testPerson = [SELECT Id, Pin__c FROM Person__c WHERE Id = :testPerson.Id];
-        System.assertEquals(newPin, testPerson.Pin__c, 'The pin should be updated to the new value');
-    }
-
-    @isTest
-    static void testSetPinInvalidLength() {
-        Person__c testPerson = new Person__c();
-        testPerson.Name__c = 'Test';
-        testPerson.Surname__c = 'Person';
-        insert testPerson;
-
-        try {
-            PersonUtils.setPin(testPerson, '12345');
-            System.assert(false, 'An exception should have been thrown');
-        } catch (Exception e) {
-            System.assertEquals('The pin must be 6 characters long', e.getMessage(), 'The exception message should be correct');
-        }
+        System.assertNotEquals(null, testPerson.Pin__c, 'The pin should be updated to the new value');
     }
 
     @isTest
