@@ -80,13 +80,13 @@ private class PersonUtilsTests {
         person.Pin__c = '123456';
         insert person;
 
-        Integer emailInvocationsBefore = Limits.getEmailInvocations();
-
         Test.startTest();
+        Integer emailInvocationsBefore = Limits.getEmailInvocations();
+       
         PersonUtils.sendPinEmail(new List<Person__c>{ person });
-        Test.stopTest();
 
         Integer emailInvocationsAfter = Limits.getEmailInvocations();
+        Test.stopTest();
 
         System.assertEquals(emailInvocationsBefore + 1, emailInvocationsAfter, 'An email should be sent to the person');
     }
