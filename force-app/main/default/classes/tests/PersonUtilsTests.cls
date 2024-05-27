@@ -59,4 +59,24 @@ private class PersonUtilsTests {
         System.assertEquals(true, PersonUtils.isPinValid('123456', testPerson), 'The pin should be valid');
         System.assertEquals(false, PersonUtils.isPinValid('654321', testPerson), 'The pin should not be valid');
     }
+
+    @isTest
+    static void testSendPinEmail() {
+        Person__c person = new Person__c();
+        person.Name__c = 'Test';
+        person.Surname__c = 'Person';
+        person.Email_Address__c = 'test@example.com';
+        person.Pin__c = '123456';
+        insert person;
+
+        Integer emailInvocationsBefore = Limits.getEmailInvocations();
+
+        Test.startTest();
+        PersonUtils.sendPinEmail(new List<Person__c>{ person });
+        Test.stopTest();
+
+        Integer emailInvocationsAfter = Limits.getEmailInvocations();
+
+        System.assertEquals(emailInvocationsBefore + 1, emailInvocationsAfter, 'An email should be sent to the person');
+    }
 }
