@@ -40,6 +40,7 @@ private class PersonUtilsTests {
         Person__c testPerson = new Person__c();
         testPerson.Name__c = 'Test';
         testPerson.Surname__c = 'Person';
+        testPerson.Email_Address__c = 'test@example.com'; //person do metody + test setup
         insert testPerson;
 
         PersonUtils.setPin(testPerson);
@@ -69,13 +70,13 @@ private class PersonUtilsTests {
         person.Pin__c = '123456';
         insert person;
 
-        Integer emailInvocationsBefore = Limits.getEmailInvocations();
-
         Test.startTest();
+        Integer emailInvocationsBefore = Limits.getEmailInvocations();
+       
         PersonUtils.sendPinEmail(new List<Person__c>{ person });
-        Test.stopTest();
 
         Integer emailInvocationsAfter = Limits.getEmailInvocations();
+        Test.stopTest();
 
         System.assertEquals(emailInvocationsBefore + 1, emailInvocationsAfter, 'An email should be sent to the person');
     }
