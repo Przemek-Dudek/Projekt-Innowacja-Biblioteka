@@ -8,11 +8,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Item__c.Available_Copies__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Item__c.Edition__c</field>
         <readable>true</readable>
     </fieldPermissions>
