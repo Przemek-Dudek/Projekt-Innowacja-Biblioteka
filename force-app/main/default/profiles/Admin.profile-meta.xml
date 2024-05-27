@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Profile xmlns="http://soap.sforce.com/2006/04/metadata">
+    <classAccesses>
+        <apexClass>ItemTriggerHandler</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>RecordTypesUtility</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
     <custom>false</custom>
     <fieldPermissions>
         <editable>true</editable>
@@ -24,6 +32,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>Item__c.Genre__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>Item__c.Items_in_use__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -72,12 +85,15 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>Item__c-Book Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+<<<<<<< HEAD
+=======
+        <layout>Item__c-Book Layout</layout>
         <recordType>Item__c.Book</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Item__c-Item Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
+>>>>>>> 213acae (Added Util class and an Item trigger (#5))
         <layout>Item__c-Magazine Layout</layout>
         <recordType>Item__c.Magazine</recordType>
     </layoutAssignments>
@@ -559,10 +575,6 @@
     <userPermissions>
         <enabled>true</enabled>
         <name>ManageDataIntegrations</name>
-    </userPermissions>
-    <userPermissions>
-        <enabled>true</enabled>
-        <name>ManageDevSandboxes</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
