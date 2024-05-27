@@ -34,10 +34,6 @@
                 <behavior>Edit</behavior>
                 <field>All_Copies__c</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Available_Copies__c</field>
-            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
