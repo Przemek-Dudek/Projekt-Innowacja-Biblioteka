@@ -37,10 +37,6 @@
                 <behavior>Required</behavior>
                 <field>All_Copies__c</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>Available_Copies__c</field>
-            </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
     </layoutSections>
