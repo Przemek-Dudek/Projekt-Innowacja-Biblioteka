@@ -70,9 +70,6 @@
         <recordType>Item__c.Book</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Item__c-Item Layout</layout>
-    </layoutAssignments>
-    <layoutAssignments>
         <layout>Item__c-Magazine Layout</layout>
         <recordType>Item__c.Magazine</recordType>
     </layoutAssignments>
