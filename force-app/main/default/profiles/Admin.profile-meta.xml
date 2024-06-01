@@ -21,11 +21,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Item__c.Available_Copies__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>Item__c.Edition__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -88,12 +83,15 @@
     </layoutAssignments>
     <layoutAssignments>
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         <layout>Item__c-Book Layout</layout>
         <recordType>Item__c.Book</recordType>
     </layoutAssignments>
     <layoutAssignments>
 >>>>>>> 213acae (Added Util class and an Item trigger (#5))
+=======
+>>>>>>> 4a8d6dd9990b07b7d108cbcc1f981e0475053d93
         <layout>Item__c-Magazine Layout</layout>
         <recordType>Item__c.Magazine</recordType>
     </layoutAssignments>
