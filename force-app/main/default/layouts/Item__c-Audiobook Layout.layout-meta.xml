@@ -27,10 +27,6 @@
                 <behavior>Edit</behavior>
                 <field>Publishing_House__c</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>Available_Copies__c</field>
-            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
