@@ -39,7 +39,6 @@ import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
 import setPin from '@salesforce/apex/PersonUtils.setPin';
 
-
 export default class Pin extends LightningElement {
     @api recordId;
     
