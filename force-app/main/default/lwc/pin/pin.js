@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { LightningElement, api } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
@@ -26,3 +27,8 @@ export default class Pin extends LightningElement {
                 });
     }
 }
+=======
+import { LightningElement } from 'lwc';
+
+export default class Pin extends LightningElement {}
+>>>>>>> a2691b9 (feat: Add Pin component and related files)

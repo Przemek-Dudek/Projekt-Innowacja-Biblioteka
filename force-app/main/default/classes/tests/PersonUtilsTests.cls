@@ -73,17 +73,12 @@ private class PersonUtilsTests {
 
     @isTest
     static void testSendPinEmail() {
-        Person__c person = new Person__c();
-        person.Name__c = 'Test';
-        person.Surname__c = 'Person';
-        person.Email_Address__c = 'test@example.com';
-        person.Pin__c = '123456';
-        insert person;
+        Person__c testPerson = [SELECT Id FROM Person__c WHERE Name__c = 'Test'];
 
         Test.startTest();
         Integer emailInvocationsBefore = Limits.getEmailInvocations();
        
-        PersonUtils.sendPinEmail(new List<Person__c>{ person });
+        PersonUtils.sendPinEmail(new List<Person__c>{ testPerson });
 
         Integer emailInvocationsAfter = Limits.getEmailInvocations();
         Test.stopTest();
