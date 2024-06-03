@@ -24,7 +24,7 @@ public with sharing class PersonUtils {
 
         System.debug('Setting new pin for person: ' + personId);
 
-        Person__c person = [SELECT Id, Pin__c FROM Person__c WHERE Id = :personId];
+        Person__c person = [SELECT Id, Pin__c, Email_Address__c FROM Person__c WHERE Id = :personId];
 
         System.debug(person);
 
