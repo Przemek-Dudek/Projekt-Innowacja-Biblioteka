@@ -21,14 +21,19 @@
  */
 @isTest
 private class PersonUtilsTests {
-    @isTest
-    static void testGetPin() {
+    @testSetup
+    static void setup() {
         Person__c testPerson = new Person__c();
         testPerson.Name__c = 'Test';
         testPerson.Surname__c = 'Person';
-
+        testPerson.Email_Address__c = 'test@example.com';
         testPerson.Pin__c = '123456';
         insert testPerson;
+    }
+
+    @isTest
+    static void testGetPin() {
+        Person__c testPerson = [SELECT Id FROM Person__c WHERE Name__c = 'Test'];
 
         String pin = PersonUtils.getPin(testPerson.Id);
 
@@ -37,13 +42,8 @@ private class PersonUtilsTests {
 
     @isTest
     static void testSetPin() {
-        Person__c testPerson = new Person__c();
-        testPerson.Name__c = 'Test';
-        testPerson.Surname__c = 'Person';
-        testPerson.Email_Address__c = 'test@example.com'; //person do metody + test setup
-        insert testPerson;
-
-        PersonUtils.setPin(testPerson);
+        Person__c testPerson = [SELECT Id FROM Person__c WHERE Name__c = 'Test'];
+        PersonUtils.setPin(testPerson.Id);
         
         testPerson = [SELECT Id, Pin__c FROM Person__c WHERE Id = :testPerson.Id];
         System.assertNotEquals(null, testPerson.Pin__c, 'The pin should be updated to the new value');
@@ -51,29 +51,19 @@ private class PersonUtilsTests {
 
     @isTest
     static void testIsPinValid() {
-        Person__c testPerson = new Person__c();
-        testPerson.Name__c = 'Test';
-        testPerson.Surname__c = 'Person';
-        testPerson.Pin__c = '123456';
-        insert testPerson;
-
-        System.assertEquals(true, PersonUtils.isPinValid('123456', testPerson), 'The pin should be valid');
-        System.assertEquals(false, PersonUtils.isPinValid('654321', testPerson), 'The pin should not be valid');
+        Person__c testPerson = [SELECT Id FROM Person__c WHERE Name__c = 'Test'];
+        System.assertEquals(true, PersonUtils.isPinValid('123456', testPerson.Id), 'The pin should be valid');
+        System.assertEquals(false, PersonUtils.isPinValid('654321', testPerson.Id), 'The pin should not be valid');
     }
 
     @isTest
     static void testSendPinEmail() {
-        Person__c person = new Person__c();
-        person.Name__c = 'Test';
-        person.Surname__c = 'Person';
-        person.Email_Address__c = 'test@example.com';
-        person.Pin__c = '123456';
-        insert person;
+        Person__c testPerson = [SELECT Id FROM Person__c WHERE Name__c = 'Test'];
 
         Test.startTest();
         Integer emailInvocationsBefore = Limits.getEmailInvocations();
        
-        PersonUtils.sendPinEmail(new List<Person__c>{ person });
+        PersonUtils.sendPinEmail(new List<Person__c>{ testPerson });
 
         Integer emailInvocationsAfter = Limits.getEmailInvocations();
         Test.stopTest();

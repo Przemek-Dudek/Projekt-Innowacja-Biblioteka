@@ -18,9 +18,10 @@ public with sharing class PersonUtils {
         return person.Pin__c;
     }
 
-    public static void setPin(Person__c person) {
+    public static void setPin(Id personId) {
         String newPin = generateNewPin();
 
+        Person__c person = [SELECT Id, Pin__c FROM Person__c WHERE Id = :personId];
         person.Pin__c = newPin;
 
         update person;
@@ -28,7 +29,8 @@ public with sharing class PersonUtils {
         sendPinEmail(new List<Person__c>{ person });
     }
 
-    public static boolean isPinValid(String pin, Person__c person) {
+    public static boolean isPinValid(String pin, Id personId) {
+        Person__c person = [SELECT Id, Pin__c FROM Person__c WHERE Id = :personId];
         return pin == person.Pin__c;
     }
 
