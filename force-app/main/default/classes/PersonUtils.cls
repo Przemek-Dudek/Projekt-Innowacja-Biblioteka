@@ -18,10 +18,16 @@ public with sharing class PersonUtils {
         return person.Pin__c;
     }
 
-    public static void setPin(Id personId) {
+    @AuraEnabled(cacheable=false)
+    public static void setPin(String personId) {
         String newPin = generateNewPin();
 
+        System.debug('Setting new pin for person: ' + personId);
+
         Person__c person = [SELECT Id, Pin__c FROM Person__c WHERE Id = :personId];
+
+        System.debug(person);
+
         person.Pin__c = newPin;
 
         update person;
