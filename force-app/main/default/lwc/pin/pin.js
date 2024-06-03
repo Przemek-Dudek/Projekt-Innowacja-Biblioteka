@@ -1,4 +1,4 @@
-import { LightningElement, api } from 'lwc';
+import { LightningElement, api } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
 import setPin from '@salesforce/apex/PersonUtils.setPin';
@@ -7,7 +7,6 @@ export default class Pin extends LightningElement {
     @api recordId;
     
     handleGenerate() {
-        console.log('recordId', this.recordId);
         setPin({ personId: this.recordId })
             .then(result => {
                 const evt = new ShowToastEvent({
