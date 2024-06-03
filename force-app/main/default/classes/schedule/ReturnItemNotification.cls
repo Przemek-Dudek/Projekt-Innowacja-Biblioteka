@@ -7,7 +7,7 @@ public with sharing class ReturnItemNotification implements Schedulable, Databas
     public static final String RETURN_NOTIFICATION_DATE = 'In following date: ';
     public static final String ERROR_MESSAGE = 'Error sending return reminder';
 
-    public static final String CRON_TIME = '0 39 10 * * ?';
+    public static final String CRON_TIME = '0 0 5 * * ?';
 
 
     @TestVisible
@@ -47,16 +47,12 @@ public with sharing class ReturnItemNotification implements Schedulable, Databas
         List<Messaging.SingleEmailMessage> mails = new List<Messaging.SingleEmailMessage>();
         for (String email : emailToItems.keySet()) {
           Messaging.SingleEmailMessage newEmail = EmailManager.createSingleEmail(
-            email,
-            String.format(
-                RETURN_NOTIFICATION,
-                new List<String>{
-                    String.join(emailToItems.get(email), '\n'),
-                    RETURN_NOTIFICATION_DATE + endOfRentalDate.format()
-                }
-            ),
+              email,
+              RETURN_NOTIFICATION + '\n' +
+              String.join(emailToItems.get(email), '\n') + '\n' +
+              RETURN_NOTIFICATION_DATE + endOfRentalDate.format(),
             SUBJECT
-          );
+            );
     
           if ((Test.isRunningTest() && shouldForceException)) {
             newEmail.toAddresses = new List<String>{ 'exampleEmail' };
@@ -118,7 +114,7 @@ public with sharing class ReturnItemNotification implements Schedulable, Databas
       }
     
       @TestVisible
-      private static Date addBusinessDays(Date yourDate, Integer additionalDays) {
+      public static Date addBusinessDays(Date yourDate, Integer additionalDays) {
         if (additionalDays <= 0) {
           return yourDate;
         }

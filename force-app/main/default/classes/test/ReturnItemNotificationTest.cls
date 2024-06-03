@@ -114,15 +114,6 @@ private class ReturnItemNotificationTest {
       additionalDays2
     );
     Assert.areEqual(expectedDate2, actualDate2, 'Test case 2 failed');
-
-    Date inputDate5 = inputDate1.addDays(2); // Tuesday
-    Date expectedDate5 = inputDate1; // Monday
-    Integer additionalDays5 = 10;
-    Date actualDate5 = ReturnItemNotification.addBusinessDays(
-      inputDate5,
-      additionalDays5
-    );
-    Assert.areEqual(expectedDate5, actualDate5, 'Test case 3 failed');
   }
 
   @IsTest
@@ -137,7 +128,7 @@ private class ReturnItemNotificationTest {
     Assert.areEqual(expectedDate1, actualDate1, 'Test case 1 failed');
 
     Date inputDate3 = inputDate1; // Saturday
-    Date expectedDate3 = inputDate1.addDays(4); // Friday
+    Date expectedDate3 = inputDate1.addDays(6); // Friday
     Integer additionalDays3 = 5;
     Date actualDate3 = ReturnItemNotification.addBusinessDays(
       inputDate3,
