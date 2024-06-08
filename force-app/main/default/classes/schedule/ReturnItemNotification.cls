@@ -1,4 +1,7 @@
 public with sharing class ReturnItemNotification implements Schedulable, Database.Batchable<SObject>, Database.Stateful{
+  //TODO: const class with consts
+  //TODO: add custom settings/custom metadata for DATS_TO_RETURN change
+  //TODO: add icon of library to email with email template
     public static final Integer DAYS_TO_RETURN = 3;
     public static final String JOB_NAME = 'Notification to return an Item';
     public static final String SUBJECT = 'Return Item Reminder';

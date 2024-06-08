@@ -11,7 +11,23 @@ public with sharing class EmailManager {
         String[] toAddresses = new List<String>{ emailAddress };
         mail.setToAddresses(toAddresses);
         mail.setSubject(emailSubject);
-        mail.setPlainTextBody(emailTextBody);
+        String htmlBody = '<html><body>' + emailTextBody + '<br /></body></html>';
+        mail.setHtmlBody(emailTextBody);
+        mail.setSenderDisplayName(EMAIL_SENDER);
+        return mail;
+    }
+
+    public static Messaging.SingleEmailMessage createSingleEmail2(
+        String emailAddress,
+        String emailTextBody,
+        String emailSubject
+    ) {
+        Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
+        String[] toAddresses = new List<String>{ emailAddress };
+        mail.setTemplateId('00X3O000003lRaMUAU');
+        mail.setToAddresses(toAddresses);
+        mail.setSubject(emailSubject);
+        mail.setHtmlBody(emailTextBody);
         mail.setSenderDisplayName(EMAIL_SENDER);
         return mail;
     }
@@ -28,13 +44,12 @@ public with sharing class EmailManager {
 
     public static void sendErrorMessage(String subject, String body) {
         List<Messaging.SingleEmailMessage> mails = new List<Messaging.SingleEmailMessage>();
-
-        Id userId = UserInfo.getUserId();
-        List<User> users = [SELECT Email FROM User WHERE Id = :userId];
+        //TODO: send mail to user id not email
+        Id userEmail = UserInfo.getUserEmail();
 
         mails.add(
         createSingleEmail(
-            users[0].Email,
+            userEmail,
             body,
             subject
         )
