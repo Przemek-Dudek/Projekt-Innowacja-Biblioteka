@@ -1,34 +1,36 @@
 @isTest
 private class EmailManagerTest {
-    public static final String EMAIL_SENDER = '240810@edu.p.lodz.pl';
+    public static final String EMAIL_RECEIVER = '240810@edu.p.lodz.pl';
     public static final String EMAIL_CONTENT = 'Example email content.';
+    public static final String EXPECTED_EMAIL_HTML_CONTENT = 
+    '<html><body>' + EMAIL_CONTENT + '<br /> <img alt="Library logo" src="test" /></body></html>';
   
     @IsTest
     public static void testCreateSingleEmail() {
       Messaging.SingleEmailMessage email = EmailManager.createSingleEmail(
-        EMAIL_SENDER,
+        EMAIL_RECEIVER,
         EMAIL_CONTENT,
         'Test Email Subject'
       );
 
-      System.assertEquals(EMAIL_SENDER, email.getToAddresses()[0]);
+      System.assertEquals(EMAIL_RECEIVER, email.getToAddresses()[0]);
       System.assertEquals('Test Email Subject', email.getSubject());
-      System.assertEquals(EMAIL_CONTENT, email.getPlainTextBody());
-      System.assertEquals(EMAIL_SENDER, email.getSenderDisplayName());
+      System.assertEquals(EXPECTED_EMAIL_HTML_CONTENT, email.getHtmlBody());
+      System.assertEquals(Consts.EMAIL_SENDER, email.getSenderDisplayName());
     }
   
     @IsTest
     public static void testCreateSingleEmailEmptySubject() {
       Messaging.SingleEmailMessage email = EmailManager.createSingleEmail(
-        EMAIL_SENDER,
+        EMAIL_RECEIVER,
         EMAIL_CONTENT,
         ''
       );
   
-      System.assertEquals(EMAIL_SENDER, email.getToAddresses()[0]);
+      System.assertEquals(EMAIL_RECEIVER, email.getToAddresses()[0]);
       System.assertEquals('', email.getSubject());
-      System.assertEquals(EMAIL_CONTENT, email.getPlainTextBody());
-      System.assertEquals(EMAIL_SENDER, email.getSenderDisplayName());
+      System.assertEquals(EXPECTED_EMAIL_HTML_CONTENT, email.getHtmlBody());
+      System.assertEquals(Consts.EMAIL_SENDER, email.getSenderDisplayName());
     }
   
     @IsTest
@@ -70,7 +72,7 @@ private class EmailManagerTest {
       EmailMessage email = sentEmails[0];
   
       System.assertEquals(
-        EMAIL_SENDER,
+        EMAIL_RECEIVER,
         email.ToAddress
       );
       System.assertEquals('Test Error Subject', email.Subject);

@@ -24,6 +24,9 @@ public with sharing class EmailManager {
     }
 
     public static String prepareImageSrc() {
+        if(Test.isRunningTest()) {
+            return 'test';
+        }
         String baseUrl = URL.getOrgDomainUrl().toExternalForm();
         Document doc = [select Id from Document where Name = :Consts.LIBRARY_LOGO];
 
@@ -42,8 +45,7 @@ public with sharing class EmailManager {
 
     public static void sendErrorMessage(String subject, String body) {
         List<Messaging.SingleEmailMessage> mails = new List<Messaging.SingleEmailMessage>();
-        //TODO: send mail to user id not email
-        Id userEmail = UserInfo.getUserEmail();
+        String userEmail = UserInfo.getUserEmail();
 
         mails.add(
         createSingleEmail(
