@@ -1,7 +1,4 @@
 public with sharing class EmailManager {
-    @TestVisible
-    private static final String EMAIL_SENDER = 'Library Notification';
-
     public static Messaging.SingleEmailMessage createSingleEmail(
         String emailAddress,
         String emailTextBody,
@@ -11,25 +8,26 @@ public with sharing class EmailManager {
         String[] toAddresses = new List<String>{ emailAddress };
         mail.setToAddresses(toAddresses);
         mail.setSubject(emailSubject);
-        String htmlBody = '<html><body>' + emailTextBody + '<br /></body></html>';
-        mail.setHtmlBody(emailTextBody);
-        mail.setSenderDisplayName(EMAIL_SENDER);
+
+        String baseUrl = URL.getOrgDomainUrl().toExternalForm();
+
+        List<String> sb = new List<String>();
+        sb.add('<html><body>');
+        sb.add(emailTextBody);
+        sb.add('<br /> <img alt="Library logo" src="'+ prepareImageSrc() +'" />');
+        sb.add('</body></html>');        
+        String htmlBody = String.join(sb, '');
+        
+        mail.setHtmlBody(htmlBody);
+        mail.setSenderDisplayName(Consts.EMAIL_SENDER);
         return mail;
     }
 
-    public static Messaging.SingleEmailMessage createSingleEmail2(
-        String emailAddress,
-        String emailTextBody,
-        String emailSubject
-    ) {
-        Messaging.SingleEmailMessage mail = new Messaging.SingleEmailMessage();
-        String[] toAddresses = new List<String>{ emailAddress };
-        mail.setTemplateId('00X3O000003lRaMUAU');
-        mail.setToAddresses(toAddresses);
-        mail.setSubject(emailSubject);
-        mail.setHtmlBody(emailTextBody);
-        mail.setSenderDisplayName(EMAIL_SENDER);
-        return mail;
+    public static String prepareImageSrc() {
+        String baseUrl = URL.getOrgDomainUrl().toExternalForm();
+        Document doc = [select Id from Document where Name = :Consts.LIBRARY_LOGO];
+
+        return baseUrl + '/servlet/servlet.FileDownload?file=' + doc.Id;
     }
 
     public static String createEmailContent(Map<String, List<String>> errorsMap) {
