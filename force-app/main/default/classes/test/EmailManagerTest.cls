@@ -1,34 +1,34 @@
 @isTest
 private class EmailManagerTest {
-    public static final String Consts.EMAIL_SENDER = '240810@edu.p.lodz.pl';
+    public static final String EMAIL_SENDER = '240810@edu.p.lodz.pl';
     public static final String EMAIL_CONTENT = 'Example email content.';
   
     @IsTest
     public static void testCreateSingleEmail() {
       Messaging.SingleEmailMessage email = EmailManager.createSingleEmail(
-        Consts.EMAIL_SENDER,
+        EMAIL_SENDER,
         EMAIL_CONTENT,
         'Test Email Subject'
       );
 
-      System.assertEquals(Consts.EMAIL_SENDER, email.getToAddresses()[0]);
+      System.assertEquals(EMAIL_SENDER, email.getToAddresses()[0]);
       System.assertEquals('Test Email Subject', email.getSubject());
       System.assertEquals(EMAIL_CONTENT, email.getPlainTextBody());
-      System.assertEquals(EmailManager.Consts.EMAIL_SENDER, email.getSenderDisplayName());
+      System.assertEquals(EMAIL_SENDER, email.getSenderDisplayName());
     }
   
     @IsTest
     public static void testCreateSingleEmailEmptySubject() {
       Messaging.SingleEmailMessage email = EmailManager.createSingleEmail(
-        Consts.EMAIL_SENDER,
+        EMAIL_SENDER,
         EMAIL_CONTENT,
         ''
       );
   
-      System.assertEquals(Consts.EMAIL_SENDER, email.getToAddresses()[0]);
+      System.assertEquals(EMAIL_SENDER, email.getToAddresses()[0]);
       System.assertEquals('', email.getSubject());
       System.assertEquals(EMAIL_CONTENT, email.getPlainTextBody());
-      System.assertEquals(EmailManager.Consts.EMAIL_SENDER, email.getSenderDisplayName());
+      System.assertEquals(EMAIL_SENDER, email.getSenderDisplayName());
     }
   
     @IsTest
@@ -70,7 +70,7 @@ private class EmailManagerTest {
       EmailMessage email = sentEmails[0];
   
       System.assertEquals(
-        Consts.EMAIL_SENDER,
+        EMAIL_SENDER,
         email.ToAddress
       );
       System.assertEquals('Test Error Subject', email.Subject);
