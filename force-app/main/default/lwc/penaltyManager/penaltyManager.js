@@ -1,7 +1,11 @@
 import { LightningElement, api } from "lwc";
 import { ShowToastEvent } from "lightning/platformShowToastEvent";
 
+<<<<<<< HEAD
 import removePenalty from '@salesforce/apex/PersonUtils.removePenalty';
+=======
+import setPin from '@salesforce/apex/PersonUtils.removePenalty';
+>>>>>>> 2fc7cbe (feat: Add removePenalty method to PersonUtils.cls and created penaltyManager LWC)
 
 export default class PenaltyManager extends LightningElement {
     @api recordId;

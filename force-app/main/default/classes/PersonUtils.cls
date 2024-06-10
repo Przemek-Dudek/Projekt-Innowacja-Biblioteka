@@ -54,6 +54,7 @@ public with sharing class PersonUtils {
     }
 
     @AuraEnabled(cacheable=false)
+<<<<<<< HEAD
     public static void removePenalty(string rentalId) {
         Rental__c rental = [SELECT Id, Overdue_Payment__c FROM Rental__c WHERE Id =: rentalId]; //+Penalty
         
@@ -69,5 +70,22 @@ public with sharing class PersonUtils {
         } catch (Exception e) {
             throw new AuraHandledException(e.getMessage());
         }
+=======
+    public static void removePenalty(string personId) {
+        Person__c person = [SELECT Id, Pin__c, Email_Address__c FROM Person__c WHERE Id = :personId]; //+Penalty
+        
+        // person.Penalty__c = 0;
+        // update person;
+
+        String htmlBody = '<html><body>';
+        htmlBody += '<h1>Your Penalty</h1>';
+        htmlBody += '<p>Your penalty is removed</p>';
+        htmlBody += '</body></html>';
+
+        Messaging.SingleEmailMessage mail = EmailHandler.createSingleEmail(person.Email_Address__c, htmlBody, 'Your Penalty has been Removed');
+        mail.setHtmlBody(htmlBody);
+        
+        Messaging.sendEmail(new List<Messaging.SingleEmailMessage>{ mail });
+>>>>>>> 2fc7cbe (feat: Add removePenalty method to PersonUtils.cls and created penaltyManager LWC)
     }
 }
