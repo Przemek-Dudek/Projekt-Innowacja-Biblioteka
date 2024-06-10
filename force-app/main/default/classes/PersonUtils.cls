@@ -78,8 +78,8 @@ public with sharing class PersonUtils {
         // update person;
 
         String htmlBody = '<html><body>';
-        htmlBody += '<h1>Your Penalty</h1>';
-        htmlBody += '<p>Your penalty is removed</p>';
+        htmlBody += '<h3>Your Penalty</h3>';
+        htmlBody += '<p>Your penalty has been removed</p>';
         htmlBody += '</body></html>';
 
         Messaging.SingleEmailMessage mail = EmailHandler.createSingleEmail(person.Email_Address__c, htmlBody, 'Your Penalty has been Removed');
