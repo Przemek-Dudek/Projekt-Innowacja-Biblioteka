@@ -54,20 +54,20 @@ public with sharing class PersonUtils {
     }
 
     @AuraEnabled(cacheable=false)
-    public static void removePenalty(string personId) {
-        Person__c person = [SELECT Id, Pin__c, Email_Address__c FROM Person__c WHERE Id = :personId]; //+Penalty
+    public static void removePenalty(string rentalId) {
+        Rental__c rental = [SELECT Id, Overdue_Payment__c FROM Rental__c WHERE Id =: rentalId]; //+Penalty
         
-        // person.Penalty__c = 0;
-        // update person;
+        rental.Overdue_Payment__c = 0;
+        update rental;
+    }
 
-        String htmlBody = '<html><body>';
-        htmlBody += '<h3>Your Penalty</h3>';
-        htmlBody += '<p>Your penalty has been removed</p>';
-        htmlBody += '</body></html>';
-
-        Messaging.SingleEmailMessage mail = EmailHandler.createSingleEmail(person.Email_Address__c, htmlBody, 'Your Penalty has been Removed');
-        mail.setHtmlBody(htmlBody);
-        
-        Messaging.sendEmail(new List<Messaging.SingleEmailMessage>{ mail });
+    @AuraEnabled(cacheable=true)
+    public static List<Rental__c> getRentals(String personId){
+        try {
+            List<Rantal__c> rentals = [SELECT Id, Item__r., Rental_Date__c, Returning_Date__c, Overdue_Payment__c FROM Rental__C WHERE Borrower__c =: personId];
+            return rentals;
+        } catch (Exception e) {
+            throw new AuraHandledException(e.getMessage());
+        }
     }
 }
