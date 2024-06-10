@@ -52,4 +52,22 @@ public with sharing class PersonUtils {
     
         Messaging.sendEmail(mails);
     }
+
+    @AuraEnabled(cacheable=false)
+    public static void removePenalty(string personId) {
+        Person__c person = [SELECT Id, Pin__c, Email_Address__c FROM Person__c WHERE Id = :personId]; //+Penalty
+        
+        // person.Penalty__c = 0;
+        // update person;
+
+        String htmlBody = '<html><body>';
+        htmlBody += '<h1>Your Penalty</h1>';
+        htmlBody += '<p>Your penalty is removed</p>';
+        htmlBody += '</body></html>';
+
+        Messaging.SingleEmailMessage mail = EmailHandler.createSingleEmail(person.Email_Address__c, htmlBody, 'Your Penalty has been Removed');
+        mail.setHtmlBody(htmlBody);
+        
+        Messaging.sendEmail(new List<Messaging.SingleEmailMessage>{ mail });
+    }
 }
