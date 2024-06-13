@@ -1,6 +1,4 @@
 public with sharing class ReturnItemNotification implements Schedulable, Database.Batchable<SObject>, Database.Stateful{
-  //TODO: add custom settings/custom metadata for DATS_TO_RETURN change
-
     @TestVisible
     private static Boolean shouldForceException = false;
     @TestVisible
@@ -10,7 +8,7 @@ public with sharing class ReturnItemNotification implements Schedulable, Databas
         ReturnItemNotification schedule = new ReturnItemNotification();
         return System.schedule(
           Consts.JOB_NAME,
-          Consts.CRON_TIME,
+          Consts.CRON_TIME_EVERY_MORNING,
           schedule
         );
       }
@@ -37,12 +35,12 @@ public with sharing class ReturnItemNotification implements Schedulable, Databas
         Date endOfRentalDate = addBusinessDays(Date.today(), Consts.DAYS_TO_RETURN);
         List<Messaging.SingleEmailMessage> mails = new List<Messaging.SingleEmailMessage>();
         for (String email : emailToItems.keySet()) {
-          Messaging.SingleEmailMessage newEmail = EmailManager.createSingleEmail(
+          Messaging.SingleEmailMessage newEmail = EmailManager.createSingleNotificationEmail(
               email,
-              Consts.RETURN_NOTIFICATION + '<br />' +
-              String.join(emailToItems.get(email), '<br />') + '<br />' +
-              Consts.RETURN_NOTIFICATION_DATE + endOfRentalDate.format() + '<br />',
-            Consts.SUBJECT
+              new List<String>{
+              String.join(emailToItems.get(email), '\n'),
+              endOfRentalDate.format()
+            }
             );
     
           if ((Test.isRunningTest() && shouldForceException)) {
