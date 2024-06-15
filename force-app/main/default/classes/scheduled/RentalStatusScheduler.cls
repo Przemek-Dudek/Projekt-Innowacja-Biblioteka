@@ -1,6 +1,7 @@
 public class RentalStatusScheduler implements Schedulable, Database.Stateful, Database.Batchable<SObject>{
+    
+
     private Set<Id> errorToIDs = new Set<Id>();
-    private Boolean isUpdateSuccessful = true;
 
     public void execute(SchedulableContext ctx) {
         Database.executeBatch(new RentalStatusScheduler());
@@ -8,7 +9,6 @@ public class RentalStatusScheduler implements Schedulable, Database.Stateful, Da
 
     public Database.QueryLocator start(Database.BatchableContext context) {
         errorToIDs = new Set<Id>();
-        isUpdateSuccessful = true;
 
         return Database.getQueryLocator([SELECT Id, Status__c, Returning_Date__c FROM Rental__c WHERE Returning_Date__c < TODAY AND Status__c = 'borrowed']);
     }
@@ -17,19 +17,22 @@ public class RentalStatusScheduler implements Schedulable, Database.Stateful, Da
         for (Rental__c rental : rentals) {
             rental.Status__c = 'delayed';
         }
-
-        try {
-            update rentals;
-        } catch (Exception e) {
-            isUpdateSuccessful = false;
-            for (Rental__c rental : rentals) {
-                errorToIDs.add(rental.Id);
+        List<Database.SaveResult> results = Database.update(rentals, false);
+            
+        
+        for (Integer i = 0; i < results.size(); i++) {
+            if (!results[i].isSuccess()) {
+                System.debug('Error in RentalStatusScheduler');
+                System.debug(rentals[i].Id);
+                System.debug(results[i].getErrors()[0].getMessage());
+                errorToIDs.add(rentals[i].Id);
             }
         }
+        
     }
 
     public void finish(Database.BatchableContext context) {
-        if (!isUpdateSuccessful) {
+        if (errorToIDs.size() > 0) {
             System.debug('Error in RentalStatusScheduler Batch'+errorToIDs);
         }
     }
