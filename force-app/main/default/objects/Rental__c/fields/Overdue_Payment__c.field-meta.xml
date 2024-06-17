@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Overdue_Payment__c</fullName>
+    <externalId>false</externalId>
+    <formula>Weekdays_From_Due__c * CASE( Item__r.RecordType.Name, &quot;Book&quot;, $CustomMetadata.Overdue_Price__mdt.Book.Amount__c , &quot;Audiobook&quot;, $CustomMetadata.Overdue_Price__mdt.Audiobook.Amount__c , &quot;Magazine&quot;, $CustomMetadata.Overdue_Price__mdt.Magazine.Amount__c , 0)</formula>
+    <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+    <label>Overdue Payment</label>
+    <precision>18</precision>
+    <required>false</required>
+    <scale>2</scale>
+    <trackTrending>false</trackTrending>
+    <type>Currency</type>
+</CustomField>
