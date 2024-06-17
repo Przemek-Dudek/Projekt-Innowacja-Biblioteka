@@ -53,23 +53,6 @@ public with sharing class PersonUtils {
         Messaging.sendEmail(mails);
     }
 
-    @AuraEnabled(cacheable=false)
-    public static void removePenalty(string rentalId) {
-        Rental__c rental = [SELECT Id, Overdue_Payment__c FROM Rental__c WHERE Id =: rentalId]; //+Penalty
-        
-        rental.Overdue_Payment__c = 0;
-        update rental;
-    }
-
-    @AuraEnabled(cacheable=true)
-    public static List<Rental__c> getRentals(String personId){
-        try {
-            List<Rantal__c> rentals = [SELECT Id, Item__r., Rental_Date__c, Returning_Date__c, Overdue_Payment__c FROM Rental__C WHERE Borrower__c =: personId];
-            return rentals;
-        } catch (Exception e) {
-            throw new AuraHandledException(e.getMessage());
-        }
-
     public static void removePenalty(string personId) {
         Person__c person = [SELECT Id, Pin__c, Email_Address__c FROM Person__c WHERE Id = :personId]; //+Penalty
         

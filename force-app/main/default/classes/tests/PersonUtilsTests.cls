@@ -70,19 +70,4 @@ private class PersonUtilsTests {
 
         System.assertEquals(emailInvocationsBefore + 1, emailInvocationsAfter, 'An email should be sent to the person');
     }
-
-    @isTest
-    static void testSendPinEmail() {
-        Person__c testPerson = [SELECT Id FROM Person__c WHERE Name__c = 'Test'];
-
-        Test.startTest();
-        Integer emailInvocationsBefore = Limits.getEmailInvocations();
-       
-        PersonUtils.sendPinEmail(new List<Person__c>{ testPerson });
-
-        Integer emailInvocationsAfter = Limits.getEmailInvocations();
-        Test.stopTest();
-
-        System.assertEquals(emailInvocationsBefore + 1, emailInvocationsAfter, 'An email should be sent to the person');
-    }
 }
