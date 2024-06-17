@@ -37,6 +37,5 @@ export default class PenaltyManager extends LightningElement {
         } else if (error) {
             console.log(error);
         }
-        }
     }
 }
