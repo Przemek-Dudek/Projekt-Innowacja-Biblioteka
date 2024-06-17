@@ -1,0 +1,17 @@
+<html>
+<head>
+</head>
+<body>
+
+<p>Hello,</p> 
+
+<p>Please return following items:</p>
+<p>{0}</p>
+<p>due to {1}</p>
+
+<p>Regards, <br /> Library </p>
+
+    <img style='width:100px;' 
+  src="https://img.freepik.com/free-vector/hand-drawn-flat-design-library-logo-template_23-2149342961.jpg?w=740&t=st=1718294908~exp=1718295508~hmac=b2410598553c91b3431998a1e1ff62c00b3501ee0ba6fe37f3fb38c06d983089" alt="Logo" />
+</body>
+</html>

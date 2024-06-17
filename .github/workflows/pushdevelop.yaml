@@ -35,5 +35,5 @@ jobs:
       - name: "Deploy metadata"
         run: sfdx force:source:deploy -p "./force-app"
         
-      # - name: "Run local tests"
-      #   run: sfdx apex run test --test-level RunLocalTests --synchronous --result-format human
+      - name: "Run local tests"
+        run: sfdx apex run test --test-level RunLocalTests --synchronous --result-format human
