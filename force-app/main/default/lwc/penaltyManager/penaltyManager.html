@@ -1,3 +1,23 @@
 <template>
-    <lightning-button variant="Destructive" label="Remove Penalty" title="Remove Penalty" onclick={handleRemovePenalty}></lightning-button>
+    <lightning-card title="Penalties" icon-name="custom:custom63">
+        <div class="slds-m-around_medium">
+            <ul class="slds-list_vertical slds-list_vertical-space">
+                <template for:each={items} for:item="item">
+                    <li key={item.id} class="slds-item">
+                        <div class="slds-grid slds-grid_align-spread slds-p-horizontal_small">
+                            <span class="slds-col slds-size_1-of-2"><b>{item.name}</b></span>
+                            <span class="slds-col slds-size_1-of-2">
+                                <div class="slds-grid slds-grid_align-spread slds-p-horizontal_small">
+                                    <span class="slds-col slds-size_1-of-2 slds-text-align_left">Penalty: {item.penalty}</span>
+                                    <span class="slds-col slds-size_1-of-2 slds-text-align_right">
+                                        <lightning-button variant="Destructive" label="Reset Penalty" data-id={item.id} onclick={handleReset}></lightning-button>
+                                    </span>
+                                </div>
+                            </span>
+                        </div>
+                    </li>
+                </template>
+            </ul>
+        </div>
+    </lightning-card>
 </template>

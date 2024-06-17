@@ -53,8 +53,8 @@ public with sharing class PersonUtils {
         Messaging.sendEmail(mails);
     }
 
-    public static void removePenalty(string personId) {
-        Person__c person = [SELECT Id, Pin__c, Email_Address__c FROM Person__c WHERE Id = :personId]; //+Penalty
+    public static void removePenalty(string rentalId) {
+        Rental__c rental = [SELECT Id, Overdue_Payment__c FROM Rental__c WHERE Id = :rentalId];
         
         rental.Overdue_Payment__c = 0;
         update rental;
