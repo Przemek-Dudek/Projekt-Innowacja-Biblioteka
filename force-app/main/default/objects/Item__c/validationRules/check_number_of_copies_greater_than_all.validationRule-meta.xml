@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Check_Number_Of_Copies_Greater_Than_All</fullName>
+    <active>true</active>
+    <errorConditionFormula>Available_Copies__c &lt; Copies_In_Use__c &amp;&amp;  RecordType.Name  &lt;&gt; &apos;Audiobook&apos;</errorConditionFormula>
+    <errorMessage>All copies have been rented.</errorMessage>
+</ValidationRule>
